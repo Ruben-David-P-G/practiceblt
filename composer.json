@@ -1,0 +1,185 @@
+{
+    "name": "drupal/recommended-project",
+    "description": "Project template for Drupal 9 projects with a relocated document root",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "php": ">=7.3",
+        "ext-dom": "*",
+        "acquia/blt": "^13.0",
+        "acquia/blt-phpcs": "^1.0",
+        "acquia/drupal-environment-detector": "^1",
+        "acquia/memcache-settings": "^1",
+        "composer/installers": "^1.9",
+        "cweagans/composer-patches": "^1.6",
+        "drupal/address": "^1.9",
+        "drupal/admin_toolbar": "^3.0",
+        "drupal/auto_entitylabel": "^3.0@beta",
+        "drupal/better_exposed_filters": "^5.0@beta",
+        "drupal/block_field": "^1.0@RC",
+        "drupal/bootstrap5": "^1.1",
+        "drupal/config_split": "^1.7",
+        "drupal/core": "^9.2.6",
+        "drupal/core-composer-scaffold": "^9",
+        "drupal/core-recommended": "^9",
+        "drupal/devel": "^4.1",
+        "drupal/editor_advanced_link": "^2.0",
+        "drupal/element_class_formatter": "^1.4",
+        "drupal/entityqueue": "^1.2",
+        "drupal/facets": "^2.0@RC",
+        "drupal/field_group": "^3.2",
+        "drupal/focal_point": "^1.5",
+        "drupal/geofield": "^1.34",
+        "drupal/gin": "^3.0@alpha",
+        "drupal/gin_gutenberg": "^1.0",
+        "drupal/gin_login": "^1.0",
+        "drupal/gin_toolbar": "^1.0@beta",
+        "drupal/image_effects": "^3.1",
+        "drupal/imageapi_optimize_webp": "^2.0@beta",
+        "drupal/inline_entity_form": "^1.0-rc7",
+        "drupal/lightning_api": "^4.6",
+        "drupal/lightning_core": "^5.8",
+        "drupal/lightning_layout": "^2.10",
+        "drupal/lightning_media": "^4.6",
+        "drupal/lightning_workflow": "^3.16",
+        "drupal/link_attributes": "^1.11",
+        "drupal/linkit": "^6.0@beta",
+        "drupal/mail_login": "^2.4",
+        "drupal/maxlength": "^1.0@RC",
+        "drupal/menu_item_extras": "^2.16",
+        "drupal/menu_link_attributes": "^1.2",
+        "drupal/mouseover_detect": "^1.8",
+        "drupal/paragraphs": "^1.12",
+        "drupal/paragraphs_modal_edit": "^1.0",
+        "drupal/rabbit_hole": "^1.0@beta",
+        "drupal/search_api": "^1.21",
+        "drupal/search_api_solr": "^4.2",
+        "drupal/simple_sitemap": "^4.0",
+        "drupal/simplify": "^1.2",
+        "drupal/smart_trim": "^1.3",
+        "drupal/twig_field_value": "^2.0",
+        "drupal/twig_tweak": "^3.1",
+        "drupal/twig_vardumper": "^3.0",
+        "drupal/twigsuggest": "^1.0@beta",
+        "drupal/ui_patterns": "^1.2",
+        "drupal/ultimate_cron": "^2.0@alpha",
+        "drupal/views_data_export": "^1.0",
+        "drupal/webform": "^6.1",
+        "drush/drush": "^10.6",
+        "oomphinc/composer-installers-extender": "^1.1 || ^2",
+        "snapappointments/bootstrap-select": "^1.14@beta"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "drupal-scaffold": {
+            "allowed-packages": [
+                "acquia/acquia_cms"
+            ],
+            "file-mapping": {
+                "[profile-root]/.editorconfig": false,
+                "[profile-root]/.gitattributes": false,
+                "[profile-root]/.travis.yml": false,
+                "[profile-root]/acquia-pipelines.yml": false,
+                "[web-root]/sites/default/default.services.yml": {
+                    "mode": "replace",
+                    "overwrite": false,
+                    "path": "docroot/core/assets/scaffold/files/default.services.yml"
+                },
+                "[web-root]/sites/default/default.settings.php": {
+                    "mode": "replace",
+                    "overwrite": false,
+                    "path": "docroot/core/assets/scaffold/files/default.settings.php"
+                }
+            },
+            "gitignore": true,
+            "locations": {
+                "profile-root": "docroot/profiles/contrib/acquia_cms",
+                "web-root": "docroot/"
+            }
+        },
+        "enable-patching": true,
+        "installer-paths": {
+            "docroot/core": [
+                "type:drupal-core"
+            ],
+            "docroot/libraries/{$name}": [
+                "type:drupal-library",
+                "type:bower-asset",
+                "type:npm-asset"
+            ],
+            "docroot/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "docroot/modules/custom/{$name}": [
+                "type:drupal-custom-module"
+            ],
+            "docroot/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "docroot/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "docroot/themes/custom/{$name}": [
+                "type:drupal-custom-theme"
+            ],
+            "drush/Commands/contrib/{$name}": [
+                "type:drupal-drush"
+            ]
+        },
+        "installer-types": [
+            "bower-asset",
+            "npm-asset"
+        ],
+        "patchLevel": {
+            "drupal/core": "-p2"
+        },
+        "patches": {
+            "drupal/core": {
+                "2869592 - Disabled update module shouldn't produce a status report warning": "https://www.drupal.org/files/issues/2020-02-07/2869592-remove-update-warning-34.patch",
+                "Error after saving node drupal 8.7 issue": "https://www.drupal.org/files/issues/2019-02-11/ignore_width_height_on_untranslatable_field_comparision_2941092_8.patch"
+            }
+        },
+        "composer-exit-on-patch-failure": true,
+        "patches-ignore": {
+            "drupal/lightning_core": {
+                "drupal/core": {
+                    "2869592 - Disabled update module shouldn't produce a status report warning": "https://www.drupal.org/files/issues/2869592-remove-update-warning-7.patch"
+                }
+            }
+        }
+    },
+    "repositories": {
+        "drupal": {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        },
+        "asset-packagist": {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        },
+        "bootstrap-select": {
+            "type": "package",
+            "package": {
+                "name": "snapappointments/bootstrap-select",
+                "version": "v1.14.0-beta2",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://github.com/snapappointments/bootstrap-select/releases/download/v1.14.0-beta2/bootstrap-select-1.14.0-beta2.zip",
+                    "type": "zip"
+                }
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "acms:install": [
+            "bash ./docroot/profiles/contrib/acquia_cms/install-acms"
+        ],
+        "nuke": [
+            "rm -rf docroot vendor composer.lock"
+        ]
+    }
+}
